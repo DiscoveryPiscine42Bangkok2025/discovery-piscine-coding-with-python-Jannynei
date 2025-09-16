@@ -2,6 +2,8 @@
 import math
 
 def main():
-    num = float(input("Give me a number: "))
-    rounded = math.ceil(num)   
+        user_input = input("Give me a number: ")
+        number = float(user_input)
+        result = math.ceil(number)
+        print(result)
 main()

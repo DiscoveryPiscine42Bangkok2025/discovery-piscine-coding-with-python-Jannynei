@@ -6,5 +6,4 @@ def main():
         msg = input("I got that! Anything else? : ")
         if (msg == "STOP"):
             break
-
 main()
