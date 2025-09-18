@@ -1,35 +1,43 @@
 #!/usr/bin/env python
 
-def checkmate(*rows):
+def checkmate(board: str):
+    rows = board.strip().split("\n")
+    n = len(rows)  
+    
+    if any(len(row) != n for row in rows):
+        print("Error")
+        return
+    
     board = [list(row) for row in rows]
-    n = len(board)
 
-    # King
-    king = None
-    for r in range(n):
-        for c in range(n):
-            if board[r][c] == "K":
-                king = (r, c)
-                break
-        if king:
-            break
-    if not king:
-        print("Fail")
+   
+    kings = [(r, c) for r in range(n) for c in range(n) if board[r][c] == "K"]
+
+   
+    if len(kings) != 1:  
+        print("Error")
         return
 
-    kr, kc = king
+   
+    has_piece = any(cell != '.' for row in board for cell in row)
+    if not has_piece:
+        print("Error")
+        return
 
+    kr, kc = kings[0]
+    
+    
     for r in range(n):
         for c in range(n):
             piece = board[r][c]
             if piece == "." or piece == "K":
                 continue
 
-            # Pawn 
+            # Pawn
             if piece == "P":
                 for dr, dc in [(-1,-1), (-1,1)]:
                     nr, nc = r+dr, c+dc
-                    if 0 <= nr < n and 0 <= nc < n and (nr, nc) == king:
+                    if 0 <= nr < n and 0 <= nc < n and (nr, nc) == (kr,kc):
                         print("Success")
                         return
 
@@ -41,7 +49,7 @@ def checkmate(*rows):
                         nr += dr
                         nc += dc
                         if board[nr][nc] != ".":
-                            if (nr,nc) == king:
+                            if (nr,nc) == (kr,kc):
                                 print("Success")
                                 return
                             break
@@ -54,7 +62,7 @@ def checkmate(*rows):
                         nr += dr
                         nc += dc
                         if board[nr][nc] != ".":
-                            if (nr,nc) == king:
+                            if (nr,nc) == (kr,kc):
                                 print("Success")
                                 return
                             break
@@ -67,7 +75,7 @@ def checkmate(*rows):
                         nr += dr
                         nc += dc
                         if board[nr][nc] != ".":
-                            if (nr,nc) == king:
+                            if (nr,nc) == (kr,kc):
                                 print("Success")
                                 return
                             break

@@ -2,19 +2,15 @@
 from checkmate import checkmate
 
 def main():
-    
-    board = [
-        "........",
-        "........",
-        "....R...",
-        "........",
-        "....K...",
-        "........",
-        "........",
-        "........"
-    ]
-
-    checkmate(*board)
+    board = """\
+......
+......
+..K...
+..Q...
+......
+......\
+"""
+    checkmate(board)
 
 if __name__ == "__main__":
     main()
